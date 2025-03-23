@@ -1,0 +1,61 @@
+FastAPI JWT Authentication Server
+This project is a FastAPI app that generates JWT tokens using RSA keys. It provides an endpoint to fetch the public keys in JWKS format and includes a test suite to verify all major functionalities.
+
+Features
+Generates RSA key pairs and stores them in SQLite.
+
+Issues JWT tokens signed with the private key.
+
+Exposes public keys via / .well-known/jwks.json in JWKS format.
+
+Supports key expiration and cleanup of old keys.
+
+Includes automated tests using pytest.
+
+Endpoints
+POST /auth: Returns a signed JWT token.
+
+GET /.well-known/jwks.json: Returns public keys in JWKS format.
+
+Only valid HTTP methods are accepted. For example, GET /auth and PUT /.well-known/jwks.json return a 405 error.
+
+Tests
+The test suite checks:
+
+Token creation
+
+Public key exposure
+
+Expired token behavior
+
+Key cleanup
+
+HTTP method restrictions
+
+Each test uses a clean database state to avoid side effects.
+
+How to Run
+Install dependencies:
+
+bash
+Copy
+Edit
+pip install fastapi[all] python-jose cryptography pytest
+Start the app:
+
+bash
+Copy
+Edit
+uvicorn jwt_server:app --reload
+Run tests:
+
+bash
+Copy
+Edit
+pytest
+Files
+jwt_server.py: Main app logic
+
+test_jwt_server.py: Pytest-based tests
+
+totally_not_my_privateKeys.db: SQLite database (auto-created)
